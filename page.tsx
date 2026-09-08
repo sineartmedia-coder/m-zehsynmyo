@@ -6,7 +6,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { buildPalace } from "./palace";
 
 const collection = (room: string, ids: number[]) =>
-  ids.map((id) => "/museum/" + room + "/" + String(id).padStart(2, "0") + ".jpg");
+  ids.map((id) => "/" + room + "/" + String(id).padStart(2, "0") + ".jpg");
 
 const COLLECTIONS = {
   main:   collection("ana-salon",   [1, 2, 3, 4, 6, 7, 9, 10]),
@@ -14,7 +14,7 @@ const COLLECTIONS = {
   love:   collection("sevgi-odasi", [1, 2, 4, 6, 8, 10, 12, 14, 17, 19]),
   gaffur: collection("anı-odasi",  [1, 2, 3, 5, 6, 8, 9, 10, 12, 14]),
   tunnel: collection("ask-tuneli",  [1, 2, 4, 5, 7, 8, 10, 11, 13, 15]),
-  final:  "/museum/buyuk-oda/01.jpg",
+  final:  "/buyuk-oda/01.jpg",
 };
 
 type Room = { xMin: number; xMax: number; zMin: number; zMax: number; floorY: number; height: number };
