@@ -10,8 +10,20 @@ const collection = (room: string, ids: number[]) =>
 
 const COLLECTIONS = {
   main:   collection("ana-salon",   [1, 2, 3, 4, 6, 7, 9, 10]),
-  pets:   collection("patili-oda",  [1, 3, 5, 7, 9, 11, 17, 20, 24, 28]),
-  love:   collection("sevgi-odasi", [1, 2, 4, 6, 8, 10, 12, 14, 17, 19]),
+  pets: [
+    "/museum/patili-oda/01.jpg", "/museum/patili-oda/IMG_0108.JPEG",
+    "/museum/patili-oda/03.jpg", "/museum/patili-oda/20220107_231429.jpg",
+    "/museum/patili-oda/05.jpg", "/museum/patili-oda/IMG_20221120_192146.jpg",
+    "/museum/patili-oda/07.jpg", "/museum/patili-oda/IMG-20211225-WA0005.jpg",
+    "/museum/patili-oda/09.jpg", "/museum/patili-oda/IMG_20250617_175444_1.jpg",
+  ],
+  love: [
+    "/museum/sevgi-odasi/01.jpg", "/museum/sevgi-odasi/IMG-20210919-WA0024.jpg",
+    "/museum/sevgi-odasi/02.jpg", "/museum/sevgi-odasi/IMG-20210503-WA0010.jpg",
+    "/museum/sevgi-odasi/04.jpg", "/museum/sevgi-odasi/20210518_181805.jpg",
+    "/museum/sevgi-odasi/06.jpg", "/museum/sevgi-odasi/IMG-20210614-WA0015.jpg",
+    "/museum/sevgi-odasi/08.jpg", "/museum/sevgi-odasi/IMG_20221102_221621.jpg",
+  ],
   gaffur: [
     "/museum/gaffur-odasi/IMG-20210329-WA0025.jpg",
     "/museum/gaffur-odasi/IMG-20210708-WA0029.jpg",
@@ -188,7 +200,7 @@ export default function Home() {
     addLabel(scene, "ÖZEL ODA",     13.65, 6.5,  -5, -Math.PI/2,  4.0);
     // Tunnel side rooms (Labels at the tunnel entrance, not inside the room)
     addLabel(scene, "PATİLİ ODA",   -4.0,  6.0, -17,  Math.PI/2,  4.0);
-    addLabel(scene, "GAFFUR ODASI",  4.0,  6.0, -17, -Math.PI/2,  4.0);
+    addLabel(scene, "ANI ODASI",     4.0,  6.0, -17, -Math.PI/2,  4.0);
     
     // Tunnel & Final Room
     addLabel(scene, "AŞK TÜNELİ",        0, 8.2,  -8.1, 0, 4.5);
@@ -409,7 +421,7 @@ function getZone(x: number, z: number) {
   if (z < -71)              return "ÖZEL ODA · FİNAL";
   if (Math.abs(x) < 4.5 && z < -7) return "AŞK TÜNELİ";
   if (x < -14 && z < -12)  return "PATİLİ ODA";
-  if (x >  14 && z < -12)  return "GAFFUR ODASI";
+  if (x >  14 && z < -12)  return "ANI ODASI";
   if (x < -14 && z <   0)  return "SEVGİ ODASI";
   if (x >  14 && z <   0)  return "ÖZEL ODA";
   if (x < -14)              return "KAFETERYA";
@@ -933,7 +945,7 @@ function addRope(scene: THREE.Scene, x: number, z: number, width: number, ry: nu
 function addLabel(scene: THREE.Scene, text: string, x: number, y: number, z: number, ry: number, width: number, goldStyle = false) {
   const canvas = document.createElement("canvas");
   const stackedGold = goldStyle && text.includes("\n");
-  canvas.width = goldStyle ? (stackedGold ? 1100 : 1600) : 1024;
+  canvas.width = goldStyle ? 1600 : 1024;
   canvas.height = goldStyle ? (stackedGold ? 1500 : 440) : 220;
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
