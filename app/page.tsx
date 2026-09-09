@@ -11,18 +11,18 @@ const collection = (room: string, ids: number[]) =>
 const COLLECTIONS = {
   main:   collection("ana-salon",   [1, 2, 3, 4, 6, 7, 9, 10]),
   pets: [
-    "/museum/patili-oda/01.jpg", "/museum/patili-oda/IMG_0108.JPEG",
-    "/museum/patili-oda/03.jpg", "/museum/patili-oda/20220107_231429.jpg",
-    "/museum/patili-oda/05.jpg", "/museum/patili-oda/IMG_20221120_192146.jpg",
-    "/museum/patili-oda/07.jpg", "/museum/patili-oda/IMG-20211225-WA0005.jpg",
-    "/museum/patili-oda/09.jpg", "/museum/patili-oda/IMG_20250617_175444_1.jpg",
+    "/museum/patili-oda/IMG-20211224-WA0021.jpg", "/museum/patili-oda/IMG-20220423-WA0011.jpg",
+    "/museum/patili-oda/LWNC9369.JPEG", "/museum/patili-oda/28.jpg",
+    "/museum/patili-oda/IMG-20211225-WA0005.jpg", "/museum/patili-oda/03.jpg",
+    "/museum/patili-oda/PFIC7863.JPEG", "/museum/patili-oda/05.jpg",
+    "/museum/patili-oda/20220313_213218.jpg", "/museum/patili-oda/20220107_231429.jpg",
   ],
   love: [
-    "/museum/sevgi-odasi/01.jpg", "/museum/sevgi-odasi/IMG-20210919-WA0024.jpg",
-    "/museum/sevgi-odasi/02.jpg", "/museum/sevgi-odasi/IMG-20210503-WA0010.jpg",
+    "/museum/sevgi-odasi/20210702_103505.jpg", "/museum/sevgi-odasi/IMG-20210708-WA0044.jpg",
+    "/museum/sevgi-odasi/14.jpg", "/museum/sevgi-odasi/02.jpg",
+    "/museum/sevgi-odasi/12.jpg", "/museum/sevgi-odasi/IMG-20210829-WA0005.jpg",
+    "/museum/sevgi-odasi/5.soru3.cevap.jpg", "/museum/sevgi-odasi/10.jpg",
     "/museum/sevgi-odasi/04.jpg", "/museum/sevgi-odasi/20210518_181805.jpg",
-    "/museum/sevgi-odasi/06.jpg", "/museum/sevgi-odasi/IMG-20210614-WA0015.jpg",
-    "/museum/sevgi-odasi/08.jpg", "/museum/sevgi-odasi/IMG_20221102_221621.jpg",
   ],
   gaffur: [
     "/museum/gaffur-odasi/IMG-20210329-WA0025.jpg",
