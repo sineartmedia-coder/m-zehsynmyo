@@ -12,7 +12,18 @@ const COLLECTIONS = {
   main:   collection("ana-salon",   [1, 2, 3, 4, 6, 7, 9, 10]),
   pets:   collection("patili-oda",  [1, 3, 5, 7, 9, 11, 17, 20, 24, 28]),
   love:   collection("sevgi-odasi", [1, 2, 4, 6, 8, 10, 12, 14, 17, 19]),
-  gaffur: collection("gaffur-odasi",[1, 2, 3, 5, 6, 8, 9, 10, 12, 14]),
+  gaffur: [
+    "/museum/gaffur-odasi/IMG-20210329-WA0025.jpg",
+    "/museum/gaffur-odasi/IMG-20210708-WA0029.jpg",
+    "/museum/gaffur-odasi/IMG-20220102-WA0010.jpg",
+    "/museum/gaffur-odasi/IMG_20230426_142956.jpg",
+    "/museum/gaffur-odasi/IMG_20251207_142128_1.jpg",
+    "/museum/gaffur-odasi/20220627_152719.jpg",
+    "/museum/gaffur-odasi/DSCF0145.JPG",
+    "/museum/gaffur-odasi/2.soru2.cevap.jpg",
+    "/museum/gaffur-odasi/2.soru3.cevap.jpg",
+    "/museum/gaffur-odasi/6.soru3.cevap.jpg",
+  ],
   tunnel: collection("ask-tuneli",  [1, 2, 4, 5, 7, 8, 10, 11, 13, 15]),
   final:  "/museum/buyuk-oda/01.jpg",
 };
@@ -185,8 +196,8 @@ export default function Home() {
 
     // Final room side walls – romantic gold text
     const frMidZ = (finalRoom.zMin + finalRoom.zMax) / 2;
-    addLabel(scene, "SENİ SEVİYORUM AŞKIM", finalRoom.xMin + 1.05, 8.0, frMidZ,  Math.PI / 2, 17.0, true);
-    addLabel(scene, "ESRA ♥ MERT",          finalRoom.xMax - 1.05, 8.0, frMidZ, -Math.PI / 2, 15.0, true);
+    addLabel(scene, "SENİ\nSEVİYORUM\nAŞKIM", finalRoom.xMin + 1.05, 8.2, frMidZ,  Math.PI / 2, 8.8, true);
+    addLabel(scene, "MİYO\n♥\nHUSO",           finalRoom.xMax - 1.05, 8.2, frMidZ, -Math.PI / 2, 7.8, true);
 
 
 
@@ -921,25 +932,32 @@ function addRope(scene: THREE.Scene, x: number, z: number, width: number, ry: nu
 // ─── Label (3D canvas sign) ───────────────────────────────────────────────────
 function addLabel(scene: THREE.Scene, text: string, x: number, y: number, z: number, ry: number, width: number, goldStyle = false) {
   const canvas = document.createElement("canvas");
-  canvas.width = goldStyle ? 1600 : 1024;
-  canvas.height = goldStyle ? 440 : 220;
+  const stackedGold = goldStyle && text.includes("\n");
+  canvas.width = goldStyle ? (stackedGold ? 1100 : 1600) : 1024;
+  canvas.height = goldStyle ? (stackedGold ? 1500 : 440) : 220;
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
   if (goldStyle) {
     // A large matte gold inscription painted directly into the wall.
-    const textSize = text.length > 16 ? 118 : 154;
-    const goldGradient = ctx.createLinearGradient(0, 0, 0, 440);
+    const textSize = stackedGold ? 188 : text.length > 16 ? 118 : 154;
+    const goldGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
     goldGradient.addColorStop(0, "#fff3bd");
     goldGradient.addColorStop(.42, "#e7bd62");
     goldGradient.addColorStop(1, "#9f6424");
-    ctx.clearRect(0, 0, 1600, 440);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.font = `700 ${textSize}px Georgia, serif`;
     ctx.textAlign = "center"; ctx.textBaseline = "middle";
     ctx.lineWidth = 6;
     ctx.strokeStyle = "#5e3515";
-    ctx.strokeText(text, 800, 224);
     ctx.fillStyle = goldGradient;
-    ctx.fillText(text, 800, 224);
+    const lines = text.split("\n");
+    const lineGap = stackedGold ? 360 : 0;
+    const firstLineY = stackedGold ? canvas.height / 2 - lineGap : canvas.height / 2;
+    lines.forEach((line, index) => {
+      const lineY = firstLineY + index * lineGap;
+      ctx.strokeText(line, canvas.width / 2, lineY);
+      ctx.fillText(line, canvas.width / 2, lineY);
+    });
   } else {
     ctx.fillStyle = "rgba(20,16,12,.93)";
     ctx.fillRect(0, 0, 1024, 220);
@@ -953,7 +971,7 @@ function addLabel(scene: THREE.Scene, text: string, x: number, y: number, z: num
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
   const sign = new THREE.Mesh(
-    new THREE.PlaneGeometry(width, width / (goldStyle ? 3.64 : 4.65)),
+    new THREE.PlaneGeometry(width, width / (goldStyle ? (stackedGold ? .73 : 3.64) : 4.65)),
     new THREE.MeshBasicMaterial({ map: texture, transparent: true })
   );
   sign.position.set(x, y, z);
